@@ -1,5 +1,5 @@
-from debian:stable-slim
-MAINTAINER Shaleen Jain <shaleen@jain.sh>
+FROM rust:slim AS builder
+MAINTAINER Coelacanthus <coelacanthus@outlook.com>
 
 LABEL "com.github.actions.name"="Zola Deploy to Pages"
 LABEL "com.github.actions.description"="Build and deploy a Zola site to GitHub Pages"
@@ -11,11 +11,19 @@ ENV LC_ALL C.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
-RUN apt-get update && apt-get install -y wget git
+ENV VER 0.14.1
+
+RUN apt-get update && apt-get install -y wget
+
+RUN mkdir -p build
 
 RUN wget -q -O - \
-"https://github.com/getzola/zola/releases/download/v0.14.1/zola-v0.14.1-x86_64-unknown-linux-gnu.tar.gz" \
-| tar xzf - -C /usr/local/bin
+"https://github.com/getzola/zola/archive/v$VER.tar.gz" \
+| tar xzf - -C build
+
+RUN cd build \
+    && cargo build --release --target x86_64-unknown-linux-gnu --all-features \
+    && mv target/x86_64-unknown-linux-gnu/release/zola /usr/bin
 
 COPY entrypoint.sh /entrypoint.sh
 

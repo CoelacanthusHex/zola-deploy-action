@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Build with the latest action rev
-      uses: shalzz/zola-deploy-action@master
+      uses: CoelacanthusHex/zola-deploy-action@master
       env:
         BUILD_ONLY: true
         BUILD_DIR: test-site
@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Build with the latest action rev
-      uses: shalzz/zola-deploy-action@master
+      uses: CoelacanthusHex/zola-deploy-action@master
       env:
         BUILD_ONLY: true
         BUILD_DIR: test-site

@@ -1,9 +1,10 @@
 name: 'Zola Deploy to Pages'
 description: 'Build and deploy a Zola site to GitHub Pages'
-author: 'Shaleen Jain'
+author: 'Coelacanthus'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://ghcr.io/CoelacanthusHex/zola-deploy-action'
+#  image: 'Dockerfile'
 branding:
   icon: 'zap'  
   color: 'green'
